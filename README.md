@@ -2,7 +2,7 @@
 
 # Overview
 
-This project is basic implementation of a Subsciber and Publsiher node in ROS.
+This project is basic implementation of a Subscriber and Publisher node in ROS.
 
 
 
