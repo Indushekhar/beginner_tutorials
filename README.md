@@ -1,4 +1,4 @@
-# ROS Beginner Tutorial - Publisher / Subcriber
+# ROS Beginner Tutorial - Publisher / Subscriber
 
 # Overview
 
@@ -13,6 +13,13 @@ This project is basic implementation of a Subscriber and Publisher node in ROS.
 2. System : Ubuntu 16.04
 
 To install ROS, follow the instructions on this [link](http://wiki.ros.org/kinetic/Installation)
+
+Don't forget to setup the ROS environment by adding the following line in your .bashrc :
+
+```
+$ source /opt/ros/kinetic/setup.bash
+
+```
 
 # Build and Run Instructions 
 
@@ -34,6 +41,13 @@ Now, for building
 <workspace>$ catkin_make 
 
 ```
+
+Just like the path of the ROS was sourced in .bashrc file, same needs to be done for the workspace by writing 
+
+```
+source <path to workspace>/devel/setup.bash
+```
+in the .bashrc. This will avoid the needs of sourcing everytime we run the package.
 
 ## Running using rosrun commands
 
