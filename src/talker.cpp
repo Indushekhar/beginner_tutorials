@@ -13,7 +13,7 @@
 #include "beginner_tutorials/change_string.h"
 
 
-std::string ss_msg = " Ros Service/Client Example";
+std::string ss_msg = "Ros_Service/Client_Example";
 
 bool changeString(beginner_tutorials::change_string::Request& req,
                            beginner_tutorials::change_string::Response& res) {
@@ -69,11 +69,13 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  int frequency=10;
+
+  ros::Rate loop_rate(frequency);
 
   ros::ServiceServer service = n.advertiseService("change_string",
                                                     changeString);
-  ROS_INFO("String Replacing Service rununing now");
+
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -86,7 +88,12 @@ int main(int argc, char **argv) {
      */
     std_msgs::String msg;
 
+
     std::stringstream ss;
+    if (argc > 1) {
+      ROS_DEBUG_STREAM("Argument is " << argv[1]);
+      ss_msg = argv[1];
+    }
     ss << ss_msg << count;
     msg.data = ss.str();
 

@@ -1,0 +1,7 @@
+<launch>
+    <arg name="ss_msg" default="Ros_Service/Client_Example"/>
+
+    <node pkg="beginner_tutorials" name="publisher" type="talker" output="screen" args="$(arg ss_msg)" />
+
+    <node pkg="beginner_tutorials" name="subscriber" type="listener" output="screen" />
+</launch>
