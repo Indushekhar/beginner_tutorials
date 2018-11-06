@@ -10,6 +10,20 @@
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/change_string.h"
+
+
+std::string ss_msg = " Ros Service/Client Example";
+
+bool changeString(beginner_tutorials::change_string::Request& req,
+                           beginner_tutorials::change_string::Response& res) {
+  ss_msg = req.text;
+  res.response = true;
+  // Warn that the message being published is changed
+  ROS_WARN_STREAM("Output text just changed");
+
+  return true;
+}
 
 
 
@@ -57,6 +71,10 @@ int main(int argc, char **argv) {
 
   ros::Rate loop_rate(10);
 
+  ros::ServiceServer service = n.advertiseService("change_string",
+                                                    changeString);
+  ROS_INFO("String Replacing Service rununing now");
+
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
@@ -69,7 +87,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "ENPM808X ROS subscriber/publishers assignment" << count;
+    ss << ss_msg << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
