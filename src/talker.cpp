@@ -1,7 +1,7 @@
 /**
 * @file talker.cpp
 * @brief ROS Publisher
-* @details Implementation of Ros Publisher node
+* @details Implementation of Ros Publisher node with a service to change text
 * @author Indushekhar Singh
 * @version 1.0
 * @copyright MIT License (c) 2018 Indushekhar Singh
@@ -14,7 +14,16 @@
 
 
 
-std::string ss_msg;
+std::string ss_msg; // Global string message decleration
+
+
+/**
+ * @brief changeString
+ *
+ * @param  request  The request
+ * @param  resp     The response
+ * @return boolean value of success
+ */
 
 bool changeString(beginner_tutorials::change_string::Request& req,
                            beginner_tutorials::change_string::Response& res) {
@@ -67,12 +76,14 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
 
   ros::Rate loop_rate(10);
 
-
+  /**
+  * Condition to handle input arguments
+  */
   if (argc == 2) {
     ROS_DEBUG_STREAM("Argument is " << argv[1]);
     ss_msg = argv[1];
@@ -86,8 +97,8 @@ int main(int argc, char **argv) {
   }
 
 
-  ros::ServiceServer service = n.advertiseService("change_string",
-                                                    changeString);
+  auto service = n.advertiseService("change_string",
+                                                    changeString); // Service for text change
 
 
   /**
