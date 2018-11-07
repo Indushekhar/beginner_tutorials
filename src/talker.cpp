@@ -13,7 +13,8 @@
 #include "beginner_tutorials/change_string.h"
 
 
-std::string ss_msg = "Ros_Service/Client_Example";
+
+std::string ss_msg;
 
 bool changeString(beginner_tutorials::change_string::Request& req,
                            beginner_tutorials::change_string::Response& res) {
@@ -21,7 +22,6 @@ bool changeString(beginner_tutorials::change_string::Request& req,
   res.response = true;
   // Warn that the message being published is changed
   ROS_WARN_STREAM("Output text just changed");
-
   return true;
 }
 
@@ -69,9 +69,22 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  int frequency=10;
 
-  ros::Rate loop_rate(frequency);
+  ros::Rate loop_rate(10);
+
+
+  if (argc == 2) {
+    ROS_DEBUG_STREAM("Argument is " << argv[1]);
+    ss_msg = argv[1];
+  } else if (argc > 2 ) {
+    ss_msg = argv[1];
+    ROS_ERROR("More than one arguments, only one will be processed");
+
+  } else {
+    ROS_FATAL_STREAM("No string argument was passed.");
+    ros::shutdown();
+  }
+
 
   ros::ServiceServer service = n.advertiseService("change_string",
                                                     changeString);
@@ -87,13 +100,7 @@ int main(int argc, char **argv) {
      * This is a message object. You stuff it with data, and then publish it.
      */
     std_msgs::String msg;
-
-
     std::stringstream ss;
-    if (argc > 1) {
-      ROS_DEBUG_STREAM("Argument is " << argv[1]);
-      ss_msg = argv[1];
-    }
     ss << ss_msg << count;
     msg.data = ss.str();
 

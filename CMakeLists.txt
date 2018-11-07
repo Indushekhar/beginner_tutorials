@@ -73,7 +73,10 @@ generate_messages(
 )
 
 
-catkin_package()
+catkin_package(
+ INCLUDE_DIRS include
+
+)
 
 include_directories(
   include
