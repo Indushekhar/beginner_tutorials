@@ -38,7 +38,7 @@ Now, for building
 
 ```
 <home>$ cd <workspace>/src
-<workspace>/src$ git clone https://github.com/Indushekhar/beginner_tutorials
+<workspace>/src$ git clone --recursive https://github.com/Indushekhar/beginner_tutorials
 <workspace>/src$ cd ..
 <workspace>$ catkin_make 
 
