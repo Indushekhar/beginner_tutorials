@@ -2,7 +2,7 @@
 
 # Overview
 
-This project is basic implementation of a Subscriber and Publisher node in ROS.
+This project is basic implementation of a Subscriber and Publisher node in ROS. Also, It has a launch file node.launch and a service change_string which changes the publisher message.
 
 
 
@@ -57,10 +57,10 @@ Please ensure that rosmaster is running before executing following steps. rosmas
 <home>$ roscore
 
 ```
-To run the publsiher node , on an another terminal 
+To run the publsiher node , on an another terminal with a string argument which is to be published. Please note here, that the program with exit with fatal warning if input string is not provided. Also, only one of the string will be passed to the talker node.
 
 ```
-<home>$ rosrun beginner_tutorials talker
+<home>$ rosrun beginner_tutorials talker "Hello World"
 
 ```
 
@@ -71,7 +71,7 @@ To run the subsrciber node , on an another terminal
 
 ```
 
-# Running using roslaunch
+## Running using roslaunch
 
 To start both the nodes from single command, a launch file named node.launch has been created. Which can be executed as :
 
@@ -83,21 +83,27 @@ To start both the nodes from single command, a launch file named node.launch has
 The launch file also except string as an argument, which will be published by the talker node. If the argument is not passed then the default argument value which is there in the launch file will be passed to the talker node. To run the node with launch file along with argument, run :
 
 ```
-<home>$ roslaunch beginner_tutorials node.launch ss_msg:="String argument to publish."
+<home>$ roslaunch beginner_tutorials node.launch ss_msg:="String-argument-to-publish."
 
 ```
+Please note that while passing the parameter to launch file the string should be a single cannot contain whitespaces.
 
-# Calling the Ros Service
+## Calling the Ros Service
 
-Service can be run from the terminal when the talker node is running. Only one string without spaces will be passed to code.
+Service can be run from the terminal when the talker node is running. 
 
 ```
 <home>$ rosservice call /change_string <string to be published>
 
 ```
+For example, for publishing ''' "I just changed text from rosservice" ''' , run :
 
+'''
+<home>$ rosservice call /change_string "I just changed text from rosservice"
 
-# Launching logger GUI
+''' 
+
+## Launching logger GUI
 
 Logger GUI can be used to check the logged messages. To launch logger GUI, run the following lines:
 
