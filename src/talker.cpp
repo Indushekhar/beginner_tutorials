@@ -14,7 +14,7 @@
 
 
 
-std::string ss_msg; // Global string message decleration
+std::string ss_msg;  // Global string message decleration
 
 
 /**
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
   if (argc == 2) {
     ROS_DEBUG_STREAM("Argument is " << argv[1]);
     ss_msg = argv[1];
-  } else if (argc > 2 ) {
+  } else if ( argc > 2 ) {
     ss_msg = argv[1];
     ROS_ERROR("More than one arguments, only one will be processed");
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
 
 
   auto service = n.advertiseService("change_string",
-                                                    changeString); // Service for text change
+                   changeString);                    // Service for text change
 
 
   /**
