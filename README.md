@@ -96,12 +96,12 @@ Service can be run from the terminal when the talker node is running.
 <home>$ rosservice call /change_string <string to be published>
 
 ```
-For example, for publishing ''' "I just changed text from rosservice" ''' , run :
+For example, for publishing ``` "I just changed text from rosservice" ```, run :
 
-'''
+```
 <home>$ rosservice call /change_string "I just changed text from rosservice"
 
-''' 
+```
 
 ## Launching logger GUI
 
