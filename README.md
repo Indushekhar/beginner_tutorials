@@ -34,7 +34,7 @@ $ cd <workspace>
 <workspace>$ catkin_make
 
 ```
-Now, for building 
+Now, for building the main branch
 
 ```
 <home>$ cd <workspace>/src
@@ -43,6 +43,18 @@ Now, for building
 <workspace>$ catkin_make 
 
 ```
+
+For building the Week10_HW branch, after cloning the main repo :
+
+```
+<workspace>/src$ cd beginner_tutorials
+<workspace>/src/beginner_tutorials$ git checkout Week10_HW
+<workspace>/src/beginner_tutorials$ ../..
+<workspace>$ catkin_make
+
+```
+
+
 
 Just like the path of the ROS was sourced in .bashrc file, same needs to be done for the workspace by writing 
 
