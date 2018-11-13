@@ -8,8 +8,10 @@
 */
 
 #include <sstream>
+#include <math.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include <tf/transform_broadcaster.h>
 #include "beginner_tutorials/change_string.h"
 
 
@@ -101,6 +103,18 @@ int main(int argc, char **argv) {
                    changeString);                    // Service for text change
 
 
+  // Create a TF broadcaster object
+
+  static tf::TransformBroadcaster tf_broad;
+  // Create transform object to set transform
+  tf::Transform transform;
+  // Create quaternion
+  tf::Quaternion quaternion;
+  // Set origin of the publisher frame
+  transform.setOrigin(tf::Vector3(1.0, 0.0 , 2.5));
+  quaternion.setRPY(0, 0, M_PI);
+  // Set the transform
+  transform.setRotation(quaternion);
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
@@ -110,6 +124,9 @@ int main(int argc, char **argv) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
+
+
+
     std_msgs::String msg;
     std::stringstream ss;
     ss << ss_msg << count;
@@ -124,6 +141,9 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
+    tf_broad.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
+                                             "/world", "/talk"));
 
     ros::spinOnce();
 
