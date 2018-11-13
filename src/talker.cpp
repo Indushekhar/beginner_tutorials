@@ -42,11 +42,12 @@
 #include "std_msgs/String.h"
 #include <tf/transform_broadcaster.h>
 #include "beginner_tutorials/change_string.h"
+#include "talker.hpp"
 
 
 
-std::string ss_msg;  // Global string message decleration
-
+//std::string ss_msg="Hello World";  // Global string message decleration
+globalText text ;
 
 /**
  * @brief changeString
@@ -58,7 +59,7 @@ std::string ss_msg;  // Global string message decleration
 
 bool changeString(beginner_tutorials::change_string::Request& req,
                            beginner_tutorials::change_string::Response& res) {
-  ss_msg = req.text;
+  text.ss_msg = req.text;
   res.response = true;
   // Warn that the message being published is changed
   ROS_WARN_STREAM("Output text just changed");
@@ -117,14 +118,14 @@ int main(int argc, char **argv) {
   */
   if (argc == 2) {
     ROS_DEBUG_STREAM("Argument is " << argv[1]);
-    ss_msg = argv[1];
+    text.ss_msg = argv[1];
   } else if ( argc > 2 ) {
-    ss_msg = argv[1];
+    text.ss_msg = argv[1];
     ROS_ERROR("More than one arguments, only one will be processed");
 
   } else {
-    ROS_FATAL_STREAM("No string argument was passed.");
-    ros::shutdown();
+    ROS_FATAL_STREAM("No string argument was passed. Publishing Default string message");
+    //ros::shutdown();
   }
 
 
@@ -158,7 +159,7 @@ int main(int argc, char **argv) {
 
     std_msgs::String msg;
     std::stringstream ss;
-    ss << ss_msg << count;
+    ss << text.ss_msg << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
