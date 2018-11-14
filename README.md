@@ -44,11 +44,11 @@ Now, for building the main branch
 
 ```
 
-For building the Week10_HW branch, after cloning the main repo :
+For building the Week11_HW branch, after cloning the main repo :
 
 ```
 <workspace>/src$ cd beginner_tutorials
-<workspace>/src/beginner_tutorials$ git checkout Week10_HW
+<workspace>/src/beginner_tutorials$ git checkout Week11_HW
 <workspace>/src/beginner_tutorials$ ../..
 <workspace>$ catkin_make
 
@@ -71,7 +71,7 @@ Please ensure that rosmaster is running before executing following steps. rosmas
 <home>$ roscore
 
 ```
-To run the publsiher node , on an another terminal with a string argument which is to be published. Please note here, that the program with exit with fatal warning if input string is not provided. Also, only one of the string will be passed to the talker node.
+To run the publsiher node, on an another terminal with a string argument which is to be published or else default prpgram message will be published. Only one of the string will be passed to the talker node.
 
 ```
 <home>$ rosrun beginner_tutorials talker "Hello World"
@@ -174,6 +174,56 @@ SUMMARY
  * FAILURES: 0
 ```
 
+## Rosbag 
+
+After successfuly build, You may run the command below to launch the nodes and record all the topics. The bag file will be in the results directory once the recording is complete. Run this launch file without any argument if you do not want to record the data. 
+
+```
+<home>$ roslaunch beginner_tutorials node.launch record:=true
+
+```
+Recording can be stopped anytime by typing CTRL+C in the terminal where above launch file was running.
 
 
+One other way to record data is. First run the talker node and then run following on an another terminal :
+
+```
+<home>$ rosbag record -a --duration=15
+
+```
+You can specify the time ( in seconds ) for which you want to record the data.
+
+We can check the information of the bag file using rosbag info <filename> command. Sample output looks like below:
+
+```
+indushekhar@indushekhar-GL502VMK:~/808X_ws/src/beginner_tutorials/results$ rosbag info talker.bag 
+path:        talker.bag
+version:     2.0
+duration:    21.9s
+start:       Nov 13 2018 16:26:49.71 (1542144409.71)
+end:         Nov 13 2018 16:27:11.65 (1542144431.65)
+size:        273.2 KB
+messages:    1308
+compression: none [1/1 chunks]
+types:       rosgraph_msgs/Log  [acffd30cd6b6de30f120938c17c593fb]
+             std_msgs/String    [992ce8a1687cec8c8bd883ec73ca41d1]
+             tf2_msgs/TFMessage [94810edda583a504dfda3829e70d7eec]
+topics:      /chatter      217 msgs    : std_msgs/String
+             /rosout       439 msgs    : rosgraph_msgs/Log  (3 connections)
+             /rosout_agg   435 msgs    : rosgraph_msgs/Log 
+             /tf           217 msgs    : tf2_msgs/TFMessage
+
+```
+
+
+###  Playing back the bag file with the listener node running
+
+Ensure that listener node is running. To see the data stored in the bag file recorded using the above command:
+
+```
+<home>$ cd catkin_ws/src/beginner_tutorials/results
+<results>$ rosbag play talker.bag
+
+```
+This command will start playing the recorded bag file and the listener node which was running previously will be able to listen to the data that is being published by talker node.
 
