@@ -115,8 +115,7 @@ int main(int argc, char **argv) {
     ROS_ERROR("More than one arguments, only one will be processed");
 
   } else {
-    ROS_FATAL_STREAM("No string argument was passed"
-     + "Publishing Default string message");
+    ROS_FATAL_STREAM("No string argument was passed");
   }
 
 
