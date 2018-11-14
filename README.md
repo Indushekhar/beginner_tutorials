@@ -125,4 +125,55 @@ Logger GUI can be used to check the logged messages. To launch logger GUI, run t
 <home>$ rosrun rqt_console rqt_console
 
 ```
+## TF Transform
+
+After running the talker node, we can check the transform tree and information published. Run the following command to check the transform information
+
+```
+<home>$ rosrun tf tf_echo /world /talk
+
+```
+
+To generate the tf tree, run 
+
+```
+<home>$ rosrun tf view_frames
+
+```
+
+## rostest/gtest
+
+Test can be run in two ways.To run the tests, run following 
+
+### 1. Using catkin_make
+
+```
+<home>$ cd <path to catkin workspace>
+<workspace>$ catkin_make run_tests_beginner_tutorials
+
+```
+### 2. Using rostest
+
+```
+<home>$ rostest beginner_tutorials unit_test.launch
+
+```
+Output is shown below :
+
+```
+[Testcase: testunit_test] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[beginner_tutorials.rosunit-unit_test/serviceTest][passed]
+
+SUMMARY
+ * RESULT: SUCCESS
+ * TESTS: 1
+ * ERRORS: 0
+ * FAILURES: 0
+```
+
+
+
 
