@@ -37,13 +37,25 @@
 #ifndef INCLUDE_TALKER_HPP_
 #define INCLUDE_TALKER_HPP_
 
+#include <math.h>
+#include <tf/transform_broadcaster.h>
+#include <sstream>
 #include <string>
+#include "beginner_tutorials/change_string.h"
+
+#include "ros/ros.h"
+#include "std_msgs/String.h"
 
 
-// This was declared to solve cpplint static string decleration issue
-struct globalText {
 
-  std::string ss_msg = "Hello World ";
+
+
+/*
+* @brief Class to declare global string variable
+*/
+class globalText {
+ public:
+    std::string ss_msg = "Hello World ";
 };
 
 #endif  // INCLUDE_TALKER_HPP_

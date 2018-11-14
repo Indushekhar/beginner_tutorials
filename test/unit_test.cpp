@@ -41,8 +41,6 @@
 /**
  * @brief  Unit test for change_string service. Checks if the service exists
  *         or not.
- *
- *
  */
 
 TEST(TESTSuite, serviceTest) {
@@ -54,4 +52,11 @@ TEST(TESTSuite, serviceTest) {
   // Check if the service exists
   bool exists(client.waitForExistence(ros::Duration(10)));
   EXPECT_TRUE(exists);
+}
+
+int main(int argc, char** argv) {
+    ros::init(argc, argv, "talkerTest");
+
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

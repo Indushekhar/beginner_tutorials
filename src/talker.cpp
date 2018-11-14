@@ -24,34 +24,25 @@
  */
 
 
-
-
-
 /**
 * @file talker.cpp
 * @brief ROS Publisher
-* @details Implementation of Ros Publisher node with a service to change text
+* @details Implementation of Ros Publisher node with a service to change text, a tf brodcaster and
+*           a service to change published text
 * @author Indushekhar Singh
 * @version 1.0
 * @copyright MIT License (c) 2018 Indushekhar Singh
 */
 
-#include <sstream>
-#include <math.h>
-#include "ros/ros.h"
-#include "std_msgs/String.h"
-#include <tf/transform_broadcaster.h>
-#include "beginner_tutorials/change_string.h"
 #include "talker.hpp"
 
 
 
-//std::string ss_msg="Hello World";  // Global string message decleration
-globalText text ;
+globalText text;
 
 /**
  * @brief changeString
- *
+ * @description Method to change text, called by change_string service
  * @param  request  The request
  * @param  resp     The response
  * @return boolean value of success
@@ -124,8 +115,8 @@ int main(int argc, char **argv) {
     ROS_ERROR("More than one arguments, only one will be processed");
 
   } else {
-    ROS_FATAL_STREAM("No string argument was passed. Publishing Default string message");
-    //ros::shutdown();
+    ROS_FATAL_STREAM("No string argument was passed"
+     + "Publishing Default string message");
   }
 
 
@@ -154,8 +145,6 @@ int main(int argc, char **argv) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
-
-
 
     std_msgs::String msg;
     std::stringstream ss;

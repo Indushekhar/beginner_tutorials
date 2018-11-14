@@ -37,7 +37,10 @@
 #include "std_msgs/String.h"
 
 /**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
+ * @brief chatterCallback function
+ * @description Callback function for subscriber, to extarct the message from publisher
+ * @param msg message to be subsrcibed
+ * @return None
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
